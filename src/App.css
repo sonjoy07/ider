@@ -12,6 +12,19 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.graph{
+  width: 30%;
+margin: 0 auto;
+}
+.csv_upload .col-md-3{
+  float: left;
+}
+.csv_upload{
+  width: 40%;
+margin: 0 auto;
+    margin-top: 0px;
+margin-top: 20%;
+}
 
 .App-header {
   background-color: #282c34;
