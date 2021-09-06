@@ -138,7 +138,7 @@ function Upload() {
                     <NavItem>
                         <NavLink
                             className={classnames({ active: activeTab === '3' })}
-                            onClick={() => { toggle('1'); }}
+                            onClick={() => { toggle('3'); }}
                         >
                             Histogram
                         </NavLink>
@@ -160,7 +160,7 @@ function Upload() {
                                         },
                                         { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
                                     ]}
-                                    layout={{ width: 320, height: 240, title: 'A Scatter Plot' }}
+                                    layout={{ width: 800, height: 450, title: 'A Scatter Plot' }}
                                 />
                             </Col>
                         </Row>
@@ -179,7 +179,7 @@ function Upload() {
                                         },
                                         { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
                                     ]}
-                                    layout={{ width: 320, height: 240, title: 'A Box Plot' }}
+                                    layout={{ width: 800, height: 450, title: 'A Box Plot' }}
                                 />
                             </Col>
 
@@ -199,7 +199,7 @@ function Upload() {
                                         },
                                         { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
                                     ]}
-                                    layout={{ width: 320, height: 240, title: 'A Histogram Plot' }}
+                                    layout={{ width: 800, height: 450, title: 'A Histogram Plot' }}
                                 />
                             </Col>
 

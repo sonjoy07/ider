@@ -13,10 +13,10 @@
   }
 }
 .graph{
-  width: 30%;
+  width: 60%;
 margin: 0 auto;
 }
-.csv_upload .col-md-3{
+.csv_upload .col-md-3,.csv_upload .col-md-9{
   float: left;
 }
 .csv_upload{
