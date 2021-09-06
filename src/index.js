@@ -4,10 +4,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore} from 'react'
+import { provider } from 'react-redux'
+
+import csvReducer from './Reducer/csvReducer'
+
+
+// const store = createStore(csvReducer)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <provider store={store}> */}
+      <App />
+    {/* </provider> */}
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
