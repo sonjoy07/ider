@@ -9,11 +9,16 @@ function TableView() {
     const state = useSelector(state => state.csv)
     const [headers, setHeader] = useState(state.header)
     const [rows, setRows] = useState(state.rows)
-    console.log('asdfasdf',state)
+    const [clickCount, setClickCount] = useState(0)
     const [activeTab, setActiveTab] = useState('1');
+    const [x, setx] = useState([]);
+    const [y, sety] = useState([]);
 
     const toggle = tab => {
         if (activeTab !== tab) setActiveTab(tab);
+    }
+    const resetCounter = () => {
+        setClickCount(0)
     }
 
     const exportCsv = () => {
@@ -36,7 +41,6 @@ function TableView() {
             csvContent += rowArray ;           
         });
         
-        console.log('csvContent',csvContent)
         var encodedUri = encodeURI(csvContent);
         var link = document.createElement("a");
         link.setAttribute("href", encodedUri);
@@ -44,18 +48,43 @@ function TableView() {
         document.body.appendChild(link); // Required for FF
         link.click();
 
-        // console.log('export', mainrow)
+    }
+    let counter = 0;
+
+    const columnNumber = (e, index) => {
+        counter++;
+        setClickCount(clickCount + 1)
+        if (clickCount == 0) {
+        let xData = []
+            rows.map(res => {
+                let row = res.split(',')
+                xData.push(row[index])
+            })
+            setx(xData)
+        }
+        if (clickCount == 1) {
+        let yData = []
+            rows.map(res => {
+                let row = res.split(',')
+                yData.push(row[index])
+            })
+            sety(yData)
+        }
+        // if()
     }
     return (
         <div className="csv_table">
+            {clickCount == 0 ? <p style={{ textAlign: 'center' }}>Please Select at least 2 columns</p>
+                :clickCount == 2&&<p style={{ textAlign: 'center' }}>If you want to change the column Please click Reset Button </p>}
             <h3>CSV Table</h3>
+            <button className="btn btn-default" onClick={resetCounter}>Reset</button>
             <button className="btn btn-primary" onClick={exportCsv}>Export to csv</button>
              <Table bordered>
                 <thead>
                     <tr>
                         {
-                            headers?.length > 0 && headers?.map(res => {
-                                return <th>{res}</th>
+                            headers?.length > 0 && headers?.map((res,i) => {
+                                return <th onClick={(e)=>columnNumber(e,i)}>{res}</th>
                             })
                         }
                     </tr>
@@ -64,10 +93,9 @@ function TableView() {
                     {
                         rows?.length > 0 && rows?.map(res => {
                             let row = res.split(',')
-                            console.log('sonjoy', row)
-                            return (<tr>
-                                {row.length > 0 && row.map(data => {
-                                    return <td>{data}</td>
+                            return (<tr >
+                                {row?.length > 0 && row?.map((data,i) => {
+                                    return <td onClick={(e)=>columnNumber(e,i)}>{data}</td>
                                 })}
                             </tr>)
                         })
@@ -109,13 +137,13 @@ function TableView() {
                                 <Plot
                                     data={[
                                         {
-                                            x: [1, 2, 3],
-                                            y: [2, 6, 3],
+                                            x: x,
+                                            y: y,
                                             type: 'scatter',
                                             mode: 'lines+markers',
                                             marker: { color: 'red' },
                                         },
-                                        { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
+                                        { type: 'bar', x: x, y: y },
                                     ]}
                                     layout={{ width: 800, height: 450, title: 'A Scatter Plot' }}
                                 />
@@ -128,13 +156,13 @@ function TableView() {
                                 <Plot
                                     data={[
                                         {
-                                            x: [1, 2, 3],
-                                            y: [2, 6, 3],
+                                            x: x,
+                                            y: y,
                                             type: 'box',
                                             mode: 'lines+markers',
                                             marker: { color: 'red' },
                                         },
-                                        { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
+                                        { type: 'bar', x: x, y: y },
                                     ]}
                                     layout={{ width: 800, height: 450, title: 'A Box Plot' }}
                                 />
@@ -148,13 +176,13 @@ function TableView() {
                                 <Plot
                                     data={[
                                         {
-                                            x: [1, 2, 3],
-                                            y: [2, 6, 3],
+                                            x: x,
+                                            y: y,
                                             type: 'histogram',
                                             mode: 'lines+markers',
                                             marker: { color: 'red' },
                                         },
-                                        { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
+                                        { type: 'bar', x: x, y: y },
                                     ]}
                                     layout={{ width: 800, height: 450, title: 'A Histogram Plot' }}
                                 />

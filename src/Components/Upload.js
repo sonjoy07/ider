@@ -18,7 +18,6 @@ function Upload() {
 
     
     const onFileChange = e => {
-        console.log('upload', e.target.files[0])
         setFileCsv(e.target.files[0])
     };
     const processCsv = (str, delim = ',') => {
@@ -32,16 +31,17 @@ function Upload() {
 
     }
     const upload = (e) => {
-        // console.log('text',typeof fileCsv)
         const csv = fileCsv
         const reader = new FileReader();
         reader.onload = (e) => {
             const text = e.target.result
-            console.log(text)
             processCsv(text)
         }
         reader.readAsText(csv)
-        history.push("/table");
+        setTimeout(() => {
+            history.push("/table");
+        },500)
+        
         
         // setCsvValue(fileCsv)
     }
@@ -60,7 +60,7 @@ function Upload() {
                     <Col md={9}>
                         <FormGroup>                            
                                 <Input type="file" onChange={onFileChange} name="email" id="exampleEmail" placeholder="with a placeholder" />
-                                <Button color="info" onClick={upload}>Submit</Button>
+                                <Button disabled={!fileCsv} color="info" onClick={upload}>Submit</Button>
                             </FormGroup>
                             
                     </Col>
