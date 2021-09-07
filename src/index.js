@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import {createStore} from 'react'
 import { provider } from 'react-redux'
 
-import csvReducer from './Reducer/csvReducer'
 
 
 // const store = createStore(csvReducer)

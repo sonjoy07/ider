@@ -7,28 +7,23 @@ import {
   Link,
 } from "react-router-dom";
 import Upload from './Components/Upload'
+import Table from './Components/TableView'
+import configureStore from './store/configureStore';
+import { Provider } from 'react-redux';
+const store = configureStore();
 
 function App() {
   return (
+    <Provider store={store}>
       <Router>
         <div>
-
-         <Upload/>
-
           <Switch>
-            <Route path="/">
-              {/* <PublicPage /> */}
-            </Route>
-            <Route path="/public">
-              {/* <PublicPage /> */}
-            </Route>
-            <Route path="/login">
-              {/* <LoginPage /> */}
-            </Route>
+            <Route exact path="/" component={Upload} />
+            <Route path="/table" component={Table} />
           </Switch>
         </div>
       </Router>
-    
+    </Provider>
   );
 }
 

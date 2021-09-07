@@ -19,6 +19,16 @@ margin: 0 auto;
 .csv_upload .col-md-3,.csv_upload .col-md-9{
   float: left;
 }
+.csv_table{
+  margin-top:80px;
+}
+.csv_table button{
+  float:right;
+  margin-bottom: 10px;
+}
+.csv_table h3{
+  text-align: center;
+}
 .csv_upload{
   width: 40%;
 margin: 0 auto;
